@@ -4,106 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-      @font-face{
-      font-family : "Matrix";
-      src : url('http://repo.perso.sfr.fr/Matrix_Code_Font/matrix.ttf');
-      }
-      body{
-      margin: 0;
-      padding: 0;
-      }
-      #canvas{
-      display: block;
-      }
-      .text{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 1;
-      font-family: "Matrix";
-      color: #00ff00;
-      height: 30px;
-      width: 260px;
-      margin: -15px -130px;
-      text-align: center;
-      font-size: 20px;
-      line-height: 25px;
-      }
-      #cursor{
-      height: 18px;
-      width: 12px;
-      background-color: #00ff00;
-      position: absolute;
-      right: 0;
-      top: 6px;
-      }
-  </style>
+  <title>Start template</title>
+  <!--build:css css/main.min.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="css/styles.css" media="screen">
+  <!-- endbower -->
+  <!-- endbuild -->
 </head>
 <body>
 
-  <canvas id="canvas"></canvas>
-    <div class="text">
-      FOLLOW THE WHITE RABBIT <span id="cursor"></span>
-    </div>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+  </div>
 
-  <script type="text/javascript">
-      var canvas = document.getElementById("canvas");
-      var ctx = canvas.getContext("2d");
-      var H = window.innerHeight;
-      var W = window.innerWidth;
-
-      canvas.height = H;
-      canvas.width = W;
-
-      var char = "Drej Creative";
-      char = char.split("");
-
-      var fontSize = 12;
-      var columns = W/fontSize;
-      var decY = [];
-      var active = 1;
-
-      for(var n = 0; n < columns; n++)
-      decY[n] = Math.round(Math.random() * (H/10));
-
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, W, H);
-      function draw()
-      {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.fillStyle = "#0F5";
-      ctx.font = fontSize + "px Matrix";
-
-      for(var i = 0; i < decY.length; i++)
-      {
-        var text = char[Math.floor(Math.random()*char.length)];
-        ctx.fillText(text, i*fontSize, decY[i]*fontSize);
-        if(decY[i]*fontSize > H && Math.random() > 0.98){
-          decY[i] = 0;
-        }
-
-        decY[i]++;
-      }
-      }
-      function cursor(){
-      c = document.getElementById("cursor");
-      console.log(c.style.display.value);
-      if(active == 1){
-        c.style.display = 'none';
-        active = 0;
-      }else{
-        c.style.display = 'block';
-        active = 1;
-      }
-      }
-
-      setInterval(draw,42);
-      setInterval(cursor, 500);
-
-  </script>
+  <!--build:js js/main.min.js -->
+  <!-- bower:js -->
+  <script src="js/main.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
 </body>
 </html>
