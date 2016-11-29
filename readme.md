@@ -2,13 +2,17 @@
 # Gulp Workflow
 ![Gulp Workflow](Gulp template.jpg)
 
-We've gone through the absolute basics of Gulp and created a workflow that's able to compile Sass into CSS while watching HTML and JS files for changes at the same time. We can run this task with the gulp command in the command line.
+We've gone through the basics of Gulp and created a workflow that's able to compile Sass into CSS while watching HTML and JS files for changes at the same time. We can run this task with the `gulp` command in the command line.
 
-We've also built a second task, build, that creates a dist folder for the production website. We compiled Sass into CSS, optimized all our assets, and copied the necessary folders into the dist folder. To run this task, we just have to type gulp build into the command line.
+We've also built a second task, build, that creates a dist folder for the production website. We compiled Sass into CSS, optimized all our assets, and copied the necessary folders into the dist folder. To run this task, we just have to type `gulp build` into the command line.
 
 Lastly, we have a clean task that clears away from the generated dist folder any image caches that are created, allowing us to remove any old files that were inadvertently kept in dist.
 
-We've created a robust workflow so far that's capable enough for most web developers. There's a lot more to Gulp and workflows that we can explore to make this process even better. Here are some ideas for you:
+* Spins up a web server
+* Compiles Sass to CSS
+* Using Autoprefixer to write vendor-free CSS code
+* Refreshes the browser automatically whenever you save a file
+* Optimizes all assets (CSS, JS, fonts, and images) for production
 
 #For development:
 
@@ -22,13 +26,6 @@ We've created a robust workflow so far that's capable enough for most web develo
 + Splitting the gulpfile into smaller files with require-dir
 + Generating a Modernizr script automatically with gulp-modernizr
 
-#For optimization:
-
-+ Removing unused CSS with unCSS
-+ Further optimizing CSS with CSSO
-+ Generating inline CSS for performance with Critical
-
-In addition to development or optimization processes, you can also add write JavaScript unit tests with gulp-jasmine and even deploy your dist folder onto your production server automatically with gulp-rync.
 
 ##Instructions
 
