@@ -13,6 +13,7 @@ Lastly, we have a clean task that clears away from the generated dist folder any
 * Using Autoprefixer to write vendor-free CSS code
 * Refreshes the browser automatically whenever you save a file
 * Optimizes all assets (CSS, JS, fonts, and images) for production
+* Convert a set of images into a spritesheet and CSS variables via gulp
 
 
 ##Instructions
