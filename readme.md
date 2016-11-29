@@ -14,18 +14,6 @@ Lastly, we have a clean task that clears away from the generated dist folder any
 * Refreshes the browser automatically whenever you save a file
 * Optimizes all assets (CSS, JS, fonts, and images) for production
 
-#For development:
-
-+ Using Autoprefixer to write vendor-free CSS code
-+ Adding Sourcemaps for easier debugging
-+ Creating Sprites with sprity
-+ Compiling only files that have changed with gulp-changed
-+ Writing ES6 with Babel or Traceur
-+ Modularizing Javascript files with Browserify, webpack, or jspm
-+ Modularizing HTML with template engines like Handlebars or Swig
-+ Splitting the gulpfile into smaller files with require-dir
-+ Generating a Modernizr script automatically with gulp-modernizr
-
 
 ##Instructions
 

@@ -12,6 +12,7 @@ var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
+var spritesmith = require('gulp.spritesmith');
 var runSequence = require('run-sequence');
 var $ = require('gulp-load-plugins')({lazy: true});
 
@@ -49,6 +50,19 @@ gulp.task('watch', function() {
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('app/**/*.html', browserSync.reload);
   gulp.watch('app/**/*.js', browserSync.reload);
+  gulp.watch(['app/images/sprites/**/*.png'], ['sprite']);
+});
+
+//Creating sprites
+gulp.task('sprite', function () {
+    var spriteData = gulp.src('app/images/sprites/*.png')
+        .pipe(spritesmith({
+            /* this whole image path is used in css background declarations */
+            imgName: '../images/sprite.png',
+            cssName: 'sprite.css'
+        }));
+    spriteData.img.pipe(gulp.dest('app/images'));
+    spriteData.css.pipe(gulp.dest('app/css'));
 });
 
 // Optimization Tasks
@@ -122,7 +136,7 @@ gulp.task('clean:dist', function() {
 // ---------------
 
 gulp.task('default', function(callback) {
-  runSequence(['sass', 'browserSync', 'watch'],
+  runSequence(['sass', 'browserSync', 'sprite', 'watch'],
     callback
   );
 });
