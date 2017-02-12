@@ -1,0 +1,50 @@
+/////////////////////////////////////
+// Device sizes
+/////////////////////////////////////
+  $zero:   0px;
+  $micro:  320px;
+  $small:  480px;
+  $medium: 768px;
+  $large:  960px;
+
+/////////////////////////////////////
+// Responsive Mixin
+/////////////////////////////////////
+  @mixin break-point($min-width: null,
+            $max-width: null,
+            $retina: null,
+            $orientation: null,
+            $min-height: null,
+            $max-height: null,
+            $media-type: screen) {
+
+      $breakpoints: ($min-width, 'and (min-width: #{$min-width})'),
+                    ($max-width, 'and (max-width: #{$max-width})'),
+                    ($retina, 'and (-webkit-device-pixel-ratio: #{$retina})'),
+                    ($orientation, 'and (orientation: #{$orientation})'),
+                    ($min-height, 'and (min-height: #{$min-height})'),
+                    ($max-height, 'and (max-height: #{$max-height})');
+
+      $media-query: null;
+
+      @each $bp, $mq in $breakpoints {
+          @if $bp != null {
+              $media-query: append($media-query, unquote($mq), space);//$media-query: append($media-query, unquote($mq), space);
+          }
+      }
+
+      @media #{$media-type} #{$media-query} {
+          @content;
+      }
+  }
+  // //Usage
+  //
+  //   // min- and max-width
+  //   @include break-point(48em,64em) { background-color: #9b59b6; }
+  //
+  //   // min-width only
+  //   @include break-point(65em) { background-color: #2ecc71; }
+  //
+  //   // max-height specified
+  //   @include break-point($max-height: 30em) { background-color: #3498db; }
+  // }

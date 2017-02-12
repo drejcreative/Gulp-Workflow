@@ -1,0 +1,123 @@
+/////////////////////////////////////
+// Sidenav
+/////////////////////////////////////
+.sidenav {
+  display: inline-block;
+  width: 300px;
+  height: 100%;
+  background: darken($dark-color, 10);
+  @include break-point(768px, 1000px) {
+    width: 240px;
+  } // End of breakpoint
+  @include break-point(0px, 768px) {
+    width: 140px;
+  } // End of breakpoint
+
+  &__header {
+    color: darken($light-color, 20);
+    font-size: 20px;
+    margin-top: 10px;
+    padding: 10px 30px;
+    @include break-point(0px, 768px) {
+      font-size: 16px;
+      padding: 10px 10px 0 10px;
+    } // End of breakpoint
+  } // End of sidenav__header
+
+  &__item {
+    font-family: $secound-font;
+    font-size: 16px;
+    padding: 10px 30px;
+    color: $light-color;
+    @include break-point(0px, 768px) {
+      font-size: 14px;
+      padding: 15px 10px;
+    } // End of breakpoint
+
+    i {
+      margin-right: 10px;
+    }
+
+    &--hide {
+      @include break-point(0px, 400px) {
+        display: none;
+      } // End of breakpoint
+    } // End of sidenav__item--hide
+
+    &--category {
+      padding: 10px 30px;
+      @include break-point(0px, 768px) {
+        padding: 10px;
+      } // End of breakpoint
+    } // End of sidenav__item--category
+
+    &--category-wrap {
+      border: 1px solid darken($light-color, 20);
+      border-radius: 3px;
+      padding: 3px 6px;
+      display: inline-block;
+      float: left;
+      margin: 5px;
+      color: darken($light-color, 20);
+      cursor: pointer;
+      font-size: 15px;
+      &:hover {
+        background: darken($dark-color, 5);
+      }
+      @include break-point(0px, 768px) {
+        font-size: 12px;
+      } // End of breakpoint
+    } // End of sidenav--category-wrap
+
+    &:hover {
+      color: $light;
+      background: darken($dark-color, 5);
+      border-right: 5px solid $main-color;
+    }
+
+    &.active {
+      color: $light;
+      background: $dark-color;
+      border-right: 5px solid $focus1;// $main-color;
+    }
+  } // End of sidenav__item
+
+  &__sort {
+    margin-left: 10px;
+  } // End of sidenav__sort
+
+  &__input {
+    margin: 10px 5px 10px 30px;
+    vertical-align: middle;
+    @include break-point(768px, 1100px) {
+      width: 60%;
+    } // End of breakpoint
+    @include break-point(0px, 768px) {
+      margin: 10px 10px 2px 10px;
+      width: 80%;
+    } // End of breakpoint
+  }  // End of sidenav__input
+
+  &__button {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: $font-regular;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.3s ease-in;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    vertical-align: middle;
+    &:hover {
+      background: $focus1;
+    }
+    &:active {
+      background: darken($focus1, 5);
+    }
+    @include break-point(0px, 768px) {
+      margin: 0px 10px 10px 10px;
+      width: 80%;
+    } // End of breakpoint
+  } // End of sidenav__button
+
+} // End of Sidenav

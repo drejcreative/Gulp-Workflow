@@ -1,0 +1,124 @@
+/////////////////////////////////////
+// Details
+/////////////////////////////////////
+.details {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  @include break-point(0px, 960px) {
+    height: 100%;
+  } // End of breakpoint
+
+  &__wrap {
+    flex: 1;
+  } // End of details__wrap
+
+  &__heading {
+    font-weight: $font-bold;
+    font-size: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+    background: $dark-color!important;
+    min-height: 80px;
+    color: darken($light-color, 20)!important;
+  } // End of details__heading
+
+  &__items {
+    display: flex;
+    padding: 10px 30px;
+    font-weight: $font-bold;
+    color: darken($light-color, 50);
+    i {
+      padding-right: 10px;
+    }
+    &--data {
+      font-family: $main-font;
+      font-weight: $font-light;
+      margin-left: auto;
+      color: $dark-color;
+    }
+  } // End of details__items
+
+  &__text {
+    padding: 10px 30px 30px 30px;
+    text-align: center;
+  } // End of details__text
+
+  &__upload {
+    padding: 30px;
+    text-align: center;
+    &--header {
+      font-weight: $font-bold;
+      margin-bottom: 20px;
+    }
+    &--progress  {
+      margin: 0 auto;
+      //margin-right: 30px;
+      position: relative;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 20px solid $focus1;
+    }
+    &--overlay {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-left: 20px;
+      margin-top: 40px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 20px;
+      color: $focus1;
+      font-weight: $font-bold;
+    }
+  } // End of details__upload
+
+  &__option {
+    display: flex;
+    height: 150px;
+    &--button {
+      color: $light;
+      font-size: 40px;
+    }
+    &--left {
+      display: inline-block;
+      width: 50%;
+      height: 100%;
+      background: $main-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        i {
+          color: $light;
+          transform: scale(1.2);
+          transition-duration: 0.3s;
+        }
+      }
+    } // End of details__option--left
+    &--right {
+      display: inline-block;
+      width: 50%;
+      height: 100%;
+      background: $focus;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        i {
+          color: $light;
+          transform: scale(1.2);
+          transition-duration: 0.3s;
+        }
+      }
+    }// End of details__option--right
+  } // End of Details__option
+} // End of Details
+
+md-backdrop {
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+}

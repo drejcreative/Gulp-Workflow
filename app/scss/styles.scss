@@ -1,0 +1,20 @@
+/*
+  	Name: File uploader Dashboard
+  	Version: 1.0
+  	Author: Andrej Vajagoc
+  	Website: http://drejcreative.com
+    email: andrejv@drejcreative.com
+  */
+
+  ///////////////////
+  // External Imports
+  ///////////////////
+  @import "../../bower_components/angular-material/angular-material.scss";
+
+  /////////////////////////////////////
+  // Imports
+  /////////////////////////////////////
+  @import 'base/module';
+  @import 'utils/module';
+  @import 'components/module';
+  @import 'layout/module';

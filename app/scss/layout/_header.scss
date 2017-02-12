@@ -1,0 +1,77 @@
+/////////////////////////////////////
+// Header
+/////////////////////////////////////
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  font-family: $main-font;
+  font-weight: $font-regular;
+  font-size: 17px;
+  line-height: 25px;
+  background: $dark-color;
+  color: $light;
+  @include break-point(0px, 768px) {
+    font-size: 15px;
+  } // End of Breakpoint
+
+  &__logo {
+    margin-left: 30px;
+    display: inline-block;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+      i { color:$focus1; }
+      @include break-point(0px, 600px) {
+        font-size: 15px;
+        &--text {
+          display: none;
+        }
+      } // End of Breakpoint
+  } // End of header__ogo
+
+  &__uploads {
+     margin-left: auto;
+     padding: 0 30px;
+     height: 80px;
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+  } // End of header__uploads
+
+  &__profile {
+    padding: 0 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      i {color: $focus1;}
+    }
+  } // End of header__profile
+
+  &__setting {
+    padding: 0 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      i {color: $focus1;}
+    }
+  } // End of header__setting
+
+  &__active {
+    background: darken($dark-color, 10);
+    border-bottom: 5px solid $main-color;
+    box-shadow: inset 0 6px 12px rgba(0,0,0,.175);
+  } // End of header__active
+
+  i {
+    padding-right: 10px;
+  }
+}//End of header

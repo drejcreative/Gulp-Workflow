@@ -1,0 +1,43 @@
+<md-sidenav flex class="details md-sidenav-right md-whiteframe-z2" md-component-id="right"
+            md-is-open="cls.sidenavOpen">
+
+  <div class="details__wrap">
+    <md-toolbar class="details__heading">
+      <h2>{{cls.details.name}}</h2>
+    </md-toolbar>
+    <md-content>
+      <div>
+        <p class="details__items"><i class="fa fa-pie-chart" aria-hidden="true"></i> Size: <span class="details__items--data">{{cls.details.size | bytes }}</span></p>
+        <p class="details__items"><i class="fa fa-calendar" aria-hidden="true"></i> Date Added: <span class="details__items--data">{{cls.details.date | date }}</span></p>
+        <p class="details__items"><i class="fa fa-calendar" aria-hidden="true"></i> Date Created: <span class="details__items--data">{{cls.details.lastModifiedDate | date }}</span></p>
+        <p class="details__items"><i class="fa fa-folder" aria-hidden="true"></i> Category: <span class="details__items--data">{{cls.details.category}}</span></p>
+      </div>
+      <div class="details__upload">
+        <div class="details__upload--header">Upload percent</div>
+        <div class="details__upload--progress">
+          <div class="details__upload--overlay">100%</div>
+        </div>
+      </div>
+      <div class="details__text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda cum, accusamus. Soluta debitis, facilis quae temporibus magni odit deserunt voluptate
+      </div>
+      <canvas id="base" class="chart-bar"
+        chart-data="data" chart-labels="labels" chart-colors="colors"
+        chart-dataset-override="datasetOverride" >
+      </canvas>
+    </div>
+
+    <div class="details__option">
+      <div class="details__option--left">
+        <a class="details__option--button" download="{{cls.details.name}}"
+            ng-href="{{cls.details.data}}">
+            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="details__option--right" ng-click="cls.deleteUpload(cls.details)">
+        <span class="details__option--button"><i class="fa fa-trash" aria-hidden="true"></i></span>
+      </div>
+    </div>
+
+  </md-content>
+</md-sidenav>

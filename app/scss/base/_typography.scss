@@ -1,0 +1,15 @@
+/////////////////////////////////////
+// Typography
+/////////////////////////////////////
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto:400,700');
+
+$main-font:      'Roboto', sans-serif;
+$secound-font:   'Lato', sans-serif;
+
+$font-light:         300;
+$font-regular:       400;
+$font-bold:          700;
+
+h1, h2, h3, h4, h5, h6 { font-family: $main-font; }
+h1, h2 { line-height: 1.1; }
+h3, h4 { line-height: 1.3; }

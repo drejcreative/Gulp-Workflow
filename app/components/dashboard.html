@@ -1,0 +1,176 @@
+<!--===============================================-->
+<!--                  HEADER                       -->
+<!--===============================================-->
+<header class="header">
+  <div class="header__logo"><i class="fa fa-refresh" aria-hidden="true"></i>Uploader</div>
+  <div class="header__uploads header__active"><i class="fa fa-cloud-upload" aria-hidden="true"></i><span class="header__logo--text"> Uploads</span></div>
+  <div class="header__profile"><i class="fa fa-user" aria-hidden="true"></i><span class="header__logo--text"> Profile</span></div>
+  <div class="header__setting"><i class="fa fa-cog" aria-hidden="true"></i><span class="header__logo--text"> Setting</span></div>
+</header>
+
+<!--===============================================-->
+<!--                  HEADER                       -->
+<!--===============================================-->
+<main>
+  <!--===============================================-->
+  <!--                  SIDENAV                      -->
+  <!--===============================================-->
+  <aside class="sidenav">
+    <div class="sidenav__wrap">
+      <h2 class="sidenav__header">Filter By:</h2>
+      <p class="sidenav__item" ng-click="cls.sortType = 'name'; sortReverse = !sortReverse">
+        <i class="fa fa-address-book" aria-hidden="true"></i>
+        <span class="sidenav__item--hide">Name</span>
+        <span ng-show="cls.sortType == 'name' && !sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-down"></span>
+        <span ng-show="cls.sortType == 'name' && sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-up"></span>
+      </p>
+      <p class="sidenav__item" ng-click="cls.sortType = 'type'; sortReverse = !sortReverse">
+        <i class="fa fa-file" aria-hidden="true"></i>
+        <span class="sidenav__item--hide">Type</span>
+        <span ng-show="cls.sortType == 'type' && !sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-down"></span>
+        <span ng-show="cls.sortType == 'type' && sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-up"></span>
+      </p>
+      <p class="sidenav__item" ng-click="cls.sortType = 'size'; sortReverse = !sortReverse">
+        <i class="fa fa-pie-chart" aria-hidden="true"></i>
+        <span class="sidenav__item--hide">Size</span>
+        <span ng-show="cls.sortType == 'size' && !sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-down"></span>
+        <span ng-show="cls.sortType == 'size' && sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-up"></span>
+      </p>
+      <p class="sidenav__item" ng-click="cls.sortType = 'date'; sortReverse = !sortReverse">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span class="sidenav__item--hide">Date</span>
+        <span ng-show="cls.sortType == 'date' && !sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-down"></span>
+        <span ng-show="cls.sortType == 'date' && sortReverse" class="pull-right sidenav__sort fa fa-chevron-circle-up"></span>
+      </p>
+    </div>
+    <div class="sidenav__wrap">
+      <h2 class="sidenav__header"><span class="sidenav__item--hide">Filter By </span>Category:</h2>
+      <div class="sidenav__item--category clearfix">
+        <p class="sidenav__item--category-wrap" ng-repeat="c in cls.categories | unique:'category'">
+          {{c}}
+        </p>
+      </div>
+    </div>
+    <div class="sidenav__wrap">
+      <h2 class="sidenav__header">Create new Category </h2>
+      <input class="sidenav__input" type="text" ng-model="cls.data.category"><button class="sidenav__button" ng-click="cls.uploadCategory(cls.data.category)">+</button>
+    </div>
+  </aside>
+  <!--===============================================-->
+  <!--                  DASHBOARD                    -->
+  <!--===============================================-->
+  <section class="dashboard">
+    <div class="dashboard__wraper">
+
+      <!--================ Dashboard Header =================-->
+      <div class="dashboard__header">
+          <div class="dashboard__upload-file">
+            <input class="inputfile" type="file" ng-file-model="data" id="file"/>
+            <label class="dashboard__upload-file--button" for="file" ng-click="cls.clear()">Choose File</label>
+          </div>
+          <div class="dashboard__category">
+            <label class="dashboard__category--select" for="">Category:</label>
+            <select ng-init="category = cls.categories[0]" ng-model="data.category" ng-options="c for c in cls.categories"></select>
+          </div>
+          <button class="dashboard__upload button button--small button__secound" ng-click="cls.uploadFile(data)">upload me</button>
+          <div class="dashboard__search">
+            <span class="fa fa-search"></span>
+            <input type="search" ng-model="uploadFilter" placeholder="Filter">
+          </div>
+      </div>
+
+      <!--================ Dashboard Progres =================-->
+      <div class="dashboard__progress" style="">
+          <div class="dashboard__progress--bar" role="progressbar" ng-style="{ 'width': cls.prevProgress + '%' }" style="width: 0%;"></div>
+      </div>
+
+      <!--================ Dashboard Controls =================-->
+      <div class="dashboard__controls">
+        <i class="fa fa-play-circle" aria-hidden="true"></i>
+        <i class="fa fa-stop-circle" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <!--======================================================-->
+    <!--                  Responsive Table                    -->
+    <!--======================================================-->
+    <div>
+      <table class="dashboard__table">
+          <thead>
+            <tr>
+              <th ng-click="cls.sortType = 'name'; sortReverse = !sortReverse">
+                Filename
+                <span ng-show="cls.sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="cls.sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+              </th>
+              <th class="dashboard__table--status">Status</th>
+              <th ng-click="cls.sortType = 'type'; sortReverse = !sortReverse">
+                File Type
+                <span ng-show="cls.sortType == 'type' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="cls.sortType == 'type' && sortReverse" class="fa fa-caret-up"></span>
+              </th>
+              <th ng-click="cls.sortType = 'size'; sortReverse = !sortReverse">
+                File Size
+                <span ng-show="cls.sortType == 'size' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="cls.sortType == 'size' && sortReverse" class="fa fa-caret-up"></span>
+              </th>
+              <th ng-click="cls.sortType = 'date'; sortReverse = !sortReverse">
+                Date
+                <span ng-show="cls.sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="cls.sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+              </th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody class="dashboard__table-body" dir-paginate="c in cls.uploads |
+                               filter: uploadFilter |
+                               orderBy: cls.sortType:sortReverse |
+                               itemsPerPage: cls.pageSize">
+            <tr>
+              <td class="dashboard__table-body--file" ng-click="cls.details(c)">
+                <i class="fa fa-file" aria-hidden="true"></i>
+                {{c.name}}
+              </td>
+              <td class="dashboard__table-body--status"><i class="fa fa-check-circle-o" aria-hidden="true"></i></td>
+              <td>{{c.type}}</td>
+              <td>{{c.size | bytes }}</td>
+              <td>{{c.date | date}}</td>
+              <td>
+                <a class="dashboard__table-body--download" download="{{c.name}}"
+                    ng-href="{{c.data}}">
+                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                </a>
+                <span class="dashboard__table-body--edit"><i ng-click="cls.details(c)" class="fa fa-pencil" aria-hidden="true"></i></span>
+                <span class="dashboard__table-body--delete"><i ng-click="cls.deleteUpload($event, c)" class="fa fa-trash" aria-hidden="true"></i></span>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <ui-view></ui-view>
+
+      <!--======================================================-->
+      <!--                  Dashboard Bottom                    -->
+      <!--======================================================-->
+      <div class="dashboard__bottom">
+        <label class="dashboard__bottom--label" for="search">Items per page:</label>
+        <select ng-model="cls.pageSize">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+
+        <dir-pagination-controls class="dashboard__pagination"
+               max-size="6"
+               direction-links="true"
+               boundary-links="true">
+        </dir-pagination-controls>
+      </div>
+
+  </section>
+
+</main>

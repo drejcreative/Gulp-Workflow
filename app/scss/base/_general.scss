@@ -1,0 +1,93 @@
+/////////////////////////////////////
+// General page specific code
+/////////////////////////////////////
+main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	background: darken($dark-color, 10);
+	@media screen and (min-width: 0px) and (max-width: 960px) {
+		height: auto;
+	}
+} // End of main
+
+input:focus,
+select:focus {
+  border-color: $main-color;
+}
+
+/////////////////////////////////////
+// part for responsive table
+/////////////////////////////////////
+table {
+	border-collapse: collapse;
+	width: calc(100% - 40px);
+  margin: 20px;
+	thead {
+		border-bottom: 3px solid $light-color;
+		th {
+			padding: 0.35em 0 .35em;
+      font-weight: 400;
+			text-align: left;
+      font-family: $main-font;
+      font-size: 16px;
+		}
+	} // End of thead
+	tbody {
+    font-family: $secound-font;
+		border-bottom: 1px solid $light-color;
+    font-size: 15px;
+    &:hover {
+      background: $light-color;
+    }
+		tr {
+			border-bottom: 1px solid #ddd;
+			td {
+				padding: .75em 5px;
+				a {
+					color: $light-color;
+					text-decoration: none;
+					display: inline-block;
+					margin: 0 .5em 0 0;
+					&:hover, &:active, &:focus {
+						color: $light-color;
+						border: none;
+					}
+				}
+				@media screen and (min-width: 0px) and (max-width: 960px) {
+	        &:hover {
+	          background: $light-color;
+	        }
+	      }
+			}
+		}
+	} // End of tbody
+	tfoot {
+		td {
+			padding: 0.35em 0 .35em;
+			text-align: left;
+			font-size: 1.25em;
+		}
+	}
+}
+
+/////////////////////////////////////
+// MediaQuery for responsive table
+/////////////////////////////////////
+@media screen and (min-width: 960px) {
+  table {
+		width: calc(100% - 40px);
+		thead {
+			border-bottom: 3px solid $light-color;
+			th {
+			}
+		}
+		tbody {
+			tr {
+				border-bottom: 1px solid $light-color;
+				td {
+				}
+			}
+		}
+	} // End of table
+} // End of media query
