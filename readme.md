@@ -24,7 +24,6 @@ Make sure you have these installed
 2. [git](www.git-scm.com).
 3. Gulp via the Mac terminal or CMD on a PC > `npm install -g gulp`
 4. Bower via the Mac terminal or CMD on a PC > `npm install -g bower`
-5. JSON server via the Mac terminal or CMD on a PC > `npm install -g json-server`
 6. HTTP-server via the Mac terminal or CMD on a PC  > `npm install http-server`
 
 
@@ -33,8 +32,6 @@ Copy this repository into your local machine
 CD to the folder with workflows
 Run > `npm install` in CMD while in root of the workflow directory to install the project dependencies
 Run > `bower install` to install the project dependencies
-Run > `json-server --watch db.json` via CMD in `app\js` folder to start mocked server
 
-Run the Gulp command > `gulp` in root directory of Project. Because I used AngularJS browsersync will open Project on this address `http://localhost:8080/` so we need to manually add hashtag to the end like this `http://localhost:8080/#/` to see our Project
-
-`http://localhost:8080/#/` to you browser to live preview your work
+Run the Gulp command > `gulp` in root directory of Project. Browser will open `http://localhost:8080` automatically.
+If not, add `http://localhost:8080` to you browser to live preview your work
