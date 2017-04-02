@@ -25,7 +25,7 @@ Make sure you have these installed
 3. Gulp via the Mac terminal or Gitbash on a PC > `npm install -g gulp`
 
 Clone this repository into your local machine using the terminal (mac) or Gitbash (PC)
-`git clone  https://github.com/drejcreative/Template-for-Gulp-workflow.git`
+`git clone https://github.com/drejcreative/Gulp-Workflow.git`
 
 CD to the folder with workflows
 Run > `npm install` to install the project dependencies
