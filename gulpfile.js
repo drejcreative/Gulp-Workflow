@@ -51,14 +51,14 @@ gulp.task('browserSync', function() {
 gulp.task('sass', function() {
   return gulp.src('app/scss/**/*.scss')       // # Gets all files ending with .scss in app/scss and children dirs
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))  // # Passes it through a gulp-sass
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))  // # Passes it through a gulp-sass
     .pipe(sourcemaps.write())
     .pipe(autoprefixer(autoprefixerOptions))  // # Adding cross browser prefixes
     .pipe(pxtorem(pxtoremOptions))            // # Converting PX to Rem with px fallback for older browsers
     .pipe(gulp.dest('app/css'))               // # Outputs it in the css folder
     .pipe(browserSync.reload({
       stream: true
-    }))
+    }));
 });
 
 // Watchers for our changes
@@ -103,10 +103,12 @@ gulp.task('scripts', function() {
 // Optimizing and concating all JavaScript files to one
 gulp.task('scripts', function() {
   return gulp.src('app/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
     }))                                 // #3. transpile ES2015 to ES5 using ES2015 preset
     .pipe(concat('js/main.min.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(useref())
     .pipe(gulpIf('js/main.min.js', uglify()))
     .pipe(gulpIf('app/css/**/*.css', cssnano()))
