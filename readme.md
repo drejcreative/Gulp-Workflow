@@ -22,14 +22,13 @@ Make sure you have these installed
 
 1. [Node.js](www.nodejs.org).
 2. [git](www.git-scm.com).
-3. Gulp via the Mac terminal or Gitbash on a PC > `npm install -g gulp`
+3. Gulp via the Mac terminal or Gitbash on a PC > `npm install --global gulp-cli`
 
 Clone this repository into your local machine using the terminal (mac) or Gitbash (PC)
 `git clone https://github.com/drejcreative/Gulp-Workflow.git`
 
 CD to the folder with workflows
 Run > `npm install` to install the project dependencies
+Run > `bower install` to install the bower dependencies if you have it
 
 Run the Gulp command > `gulp`
-
-And add `http://localhost:3000` to you browser to live preview your work
