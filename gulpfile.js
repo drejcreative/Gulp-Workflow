@@ -1,4 +1,4 @@
-const gulp = require('gulp'),
+var gulp = require('gulp'),
       sass = require('gulp-sass'),
       autoprefixer = require('gulp-autoprefixer'),
       babel = require('gulp-babel'),
@@ -17,35 +17,34 @@ const gulp = require('gulp'),
       filter    = require('gulp-filter'),
       svg2png   = require('gulp-svg2png'),
       spritesmith = require('gulp.spritesmith'),
-      runSequence = require('run-sequence'),
       imgRetina = require('gulp-img-retina'),
       pxtorem = require('gulp-pxtorem'),
+      notify = require('gulp-notify'),
       $ = require('gulp-load-plugins')({lazy: true});
 
 // #For old NodeJS versions
-const Promise = require('es6-promise').polyfill();
+var Promise = require('es6-promise').polyfill();
 
 // #Autiprefixer options
-const autoprefixerOptions = {
+var autoprefixerOptions = {
   browsers: ['last 20 versions', '> 5%', 'Firefox ESR']
 };
 
-const pxtoremOptions = {
-    replace: false
+// Push Errors
+var interceptErrors = function(error) {
+  var args = Array.prototype.slice.call(arguments);
+  // Send error to notification center with gulp-notify
+  notify.onError({
+    title: 'Compile Error',
+    message: '<%= error.message %>'
+  }).apply(this, args);
+  // Keep gulp from hanging on this task
+  this.emit('end');
 };
 
-// #Start browserSync server
-gulp.task('browserSync', function() {
-  browserSync({
-    server: {
-      baseDir: 'app',
-      routes: {
-        "/bower_components": "bower_components"
-      }
-    },
-    port: 8080
-  });
-});
+var pxtoremOptions = {
+    replace: false
+};
 
 // #Scss with Autoprefixer - Adding all cross browser prefixes
 gulp.task('sass', function() {
@@ -61,20 +60,15 @@ gulp.task('sass', function() {
     }));
 });
 
-// Watchers for our changes
-gulp.task('watch', function() {
-  gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('app/**/*.html', browserSync.reload);
-  gulp.watch('app/**/*.js', browserSync.reload);
-});
-
 //Creating sprites from svg vector images
-gulp.task('spriteSvg', function () {
+gulp.task('spriteSvg', ['spriteSvg'], function () {
   return gulp.src('app/images/svg/*.svg')
-        .pipe(svgSprite({mode: "symbols"}))
+        .pipe(svgSprite({
+          //mode: "symbols"
+        }))
         .pipe(gulp.dest("app/images/icons"))    // # Write the sprite-sheet + CSS + Preview
-        .pipe(filter("app/images/**/*.svg"))    // # Filter out everything except the SVG file
-        .pipe(svg2png())                        // # Create a PNG
+        //.pipe(filter("app/images/**/*.svg"))    // # Filter out everything except the SVG file
+        //.pipe(svg2png())                        // # Create a PNG
         .pipe(gulp.dest("app/images/icons"));
 });
 
@@ -82,41 +76,21 @@ gulp.task('spriteSvg', function () {
 // Optimization Tasks
 // ------------------
 
-// Optimizing JavaScript for Angular with custom file load
-/*
-gulp.task('scripts', function() {
-  return gulp.src(['app/js/angular.js',
-                   'app/js/angular-animate.min.js',
-                   'app/js/main.js',
-                   'app/components/classifieldFactory.js',
-                   'app/components/classifieldCtr.js',
-                   'app/components/new/classifield.newCtr.js',
-                   'app/components/edit/classifield.editCtr.js'])
-    .pipe(concat('js/main.min.js'))
-    .pipe(ngAnnotate())
-    .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulp.dest('dist'));
-});
-*/
-
 // Optimizing and concating all JavaScript files to one
-gulp.task('scripts', function() {
+gulp.task('scripts', ['clean:dist'], function() {
   return gulp.src('app/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
-    }))                                 // #3. transpile ES2015 to ES5 using ES2015 preset
+    }))
+    .on('error', interceptErrors)
     .pipe(concat('js/main.min.js'))
     .pipe(sourcemaps.write('.'))
-    .pipe(useref())
-    .pipe(gulpIf('js/main.min.js', uglify()))
-    .pipe(gulpIf('app/css/**/*.css', cssnano()))
     .pipe(gulp.dest('dist'));
 });
 
-// Optimizing HTML and CSS files
-gulp.task('styles', function() {
+// Optimizing CSS files
+gulp.task('styles', ['scripts'], function() {
   return gulp.src('app/css/**/*.css')
     .pipe(imgRetina()) // Adding retina display version images Example: <img src="images/default/example.jpg" alt="example image" srcset="images/default/example.jpg 1x, images/default/example@2x.jpg 2x, images/default/example@3x.jpg 3x" />
     .pipe(concat('css/main.min.css'))
@@ -125,15 +99,19 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('dist'));
 });
 
-// Optimizing HTML and CSS files
-gulp.task('useref', function() {
+// Optimizing HTML files
+gulp.task('useref', ['styles'], function() {
   return gulp.src('app/**/*.html')
+    .on('error', interceptErrors)
+    .pipe(imgRetina())
     .pipe(useref())
+    .pipe(gulpIf('js/main.min.js', uglify()))
+    .pipe(gulpIf('css/main.min.css', cssnano()))
     .pipe(gulp.dest('dist'));
 });
 
 // Optimizing Images
-gulp.task('images', function() {
+gulp.task('images', ['useref'], function() {
   return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
     // Caching images that ran through imagemin
     .pipe(cache(imagemin({
@@ -143,19 +121,12 @@ gulp.task('images', function() {
 });
 
 // Copying fonts
-gulp.task('fonts', function() {
+gulp.task('fonts', ['images'], function() {
   return gulp.src('app/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 });
 
-// Cleaning
-gulp.task('clean', function() {
-  return del.sync('dist').then(function(cb) {
-    return cache.clearAll(cb);
-  });
-});
-
-gulp.task('clean:dist', function() {
+gulp.task('clean:dist',  function() {
   return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
 });
 
@@ -163,18 +134,28 @@ gulp.task('clean:dist', function() {
 // Build Sequences
 // ---------------
 
-gulp.task('default', function(callback) {
-  runSequence(['sass', 'browserSync'],
-  'watch',
-    callback
-  );
+gulp.task('default', ['sass'], function(callback) {
+
+  browserSync.init(['./app/**/**.**'], {
+    server: {
+      baseDir: './app',
+      routes: {
+          '/bower_components': 'bower_components'
+      }
+    },
+    port: 4000,
+    notify: false,
+    ui: {
+      port: 4001
+    }
+  });
+
+  gulp.watch('app/scss/**/*.scss', ['sass']);
+  gulp.watch('app/**/*.html', browserSync.reload);
+  gulp.watch('app/**/*.js', browserSync.reload);
+  gulp.watch('app/images/svg/*.svg', ['spriteSvg']);
 });
 
-gulp.task('build', function(callback) {
-  runSequence(
-    'clean:dist',
-    'sass',
-    ['scripts', 'styles', 'useref', 'images', 'fonts'],
-    callback
-  );
+gulp.task('build', ['fonts'], function(callback) {
+
 });
