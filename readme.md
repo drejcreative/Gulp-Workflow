@@ -1,6 +1,6 @@
 
 # Gulp Workflow
-![Gulp Workflow](Gulp template.jpg)
+![Gulp Workflow](gulp-template.jpg)
 
 We've gone through the basics of Gulp and created a workflow that's able to compile Sass into CSS while watching HTML and JS files for changes at the same time. We can run this task with the `gulp` command in the command line.
 
