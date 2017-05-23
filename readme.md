@@ -13,7 +13,7 @@ Lastly, we have a clean task that clears away from the generated dist folder any
 * Using Autoprefixer to write vendor-free CSS code
 * Refreshes the browser automatically whenever you save a file
 * Optimizes all assets (CSS, JS, fonts, and images) for production
-* Convert a set of images into a spritesheet and CSS variables via gulp
+* Convert a set of svg's into a spritesheet and CSS variables via gulp
 
 
 ##Instructions
@@ -31,4 +31,5 @@ CD to the folder with workflows
 Run > `npm install` to install the project dependencies
 Run > `bower install` to install the bower dependencies if you have it
 
-Run the Gulp command > `gulp`
+Run the Gulp command > `gulp` to start a server
+Run the > `gulp build` to create a production ready code in dist folder
