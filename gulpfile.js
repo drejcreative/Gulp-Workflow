@@ -7,7 +7,7 @@
         'optimization'
     ]);
 
-    gulp.task('default', ['sync'], function(callback) {});
-    gulp.task('build', ['fonts'], function(callback) {});
+    gulp.task('default', ['sync', 'spriteSvg'], function() {});
+    gulp.task('build', ['sass', 'spriteSvg', 'fonts'], function() {});
 
 }());
