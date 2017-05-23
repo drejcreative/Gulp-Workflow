@@ -133,3 +133,5 @@ dist/
 
 # sftp configuration file
 sftp-config.json
+
+./app/images/icons
