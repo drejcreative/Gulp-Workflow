@@ -1,5 +1,5 @@
 var gulp        = require('gulp'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync');
 
 // #For old NodeJS versions
 var Promise = require('es6-promise').polyfill();
@@ -7,8 +7,14 @@ var Promise = require('es6-promise').polyfill();
 
 module.exports = function() {
 
-  gulp.task('sync', ['sass'], function () {
-    browserSync.init(['./app/**/**.**'], {
+  gulp.task('sync', ['sass'], function() {
+
+    gulp.watch('app/scss/**/*.scss', ['sass']);
+    gulp.watch('app/**/*.html', browserSync.reload);
+    gulp.watch('app/**/*.js', browserSync.reload);
+    gulp.watch('app/images/svg/*.svg', ['spriteSvg']);
+
+    browserSync.init({
       server: {
         baseDir: './app',
         routes: {
@@ -21,10 +27,6 @@ module.exports = function() {
         port: 4001
       }
     });
-    gulp.watch('app/scss/**/*.scss', ['sass']);
-    gulp.watch('app/**/*.html', browserSync.reload);
-    gulp.watch('app/**/*.js', browserSync.reload);
-    gulp.watch('app/images/svg/*.svg', ['spriteSvg']);
   });
 
 };

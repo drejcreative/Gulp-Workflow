@@ -1,6 +1,4 @@
 var gulp = require('gulp'),
-      sass = require('gulp-sass'),
-      autoprefixer = require('gulp-autoprefixer'),
       babel = require('gulp-babel'),
       sourcemaps = require('gulp-sourcemaps'),
       browserSync = require('browser-sync'),
@@ -13,22 +11,10 @@ var gulp = require('gulp'),
       imagemin = require('gulp-imagemin'),
       cache = require('gulp-cache'),
       del = require('del'),
-      svgSprite = require("gulp-svg-sprites"),
-      filter    = require('gulp-filter'),
-      svg2png   = require('gulp-svg2png'),
-      spritesmith = require('gulp.spritesmith'),
       imgRetina = require('gulp-img-retina'),
       pxtorem = require('gulp-pxtorem'),
       notify = require('gulp-notify'),
       $ = require('gulp-load-plugins')({lazy: true});
-
-// #For old NodeJS versions
-var Promise = require('es6-promise').polyfill();
-
-// #Autiprefixer options
-var autoprefixerOptions = {
-  browsers: ['last 20 versions', '> 5%', 'Firefox ESR']
-};
 
 // Push Errors
 var interceptErrors = function(error) {
@@ -40,10 +26,6 @@ var interceptErrors = function(error) {
   }).apply(this, args);
   // Keep gulp from hanging on this task
   this.emit('end');
-};
-
-var pxtoremOptions = {
-    replace: false
 };
 
 module.exports = function() {
