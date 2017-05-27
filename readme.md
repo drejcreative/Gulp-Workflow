@@ -28,8 +28,8 @@ Clone this repository into your local machine using the terminal (mac) or Gitbas
 `git clone https://github.com/drejcreative/Gulp-Workflow.git`
 
 CD to the folder with workflows
-Run > `npm install` to install the project dependencies
-Run > `bower install` to install the bower dependencies if you have it
+Run > `npm install` to install the project dependencies  
+Run > `bower install` to install the bower dependencies if you have it  
 
-Run the Gulp command > `gulp` to start a server
+Run the Gulp command > `gulp` to start a server  
 Run the > `gulp build` to create a production ready code in dist folder
