@@ -22,7 +22,7 @@ Make sure you have these installed
 
 1. [Node.js](www.nodejs.org).
 2. [git](www.git-scm.com).
-3. Gulp via the Mac terminal or Gitbash on a PC > `npm install --global gulp-cli`
+3. Gulp via the Mac terminal or CMD on a PC > `npm install --global gulp-cli`
 
 Clone this repository into your local machine using the terminal (mac) or Gitbash (PC)
 `git clone https://github.com/drejcreative/Gulp-Workflow.git`
